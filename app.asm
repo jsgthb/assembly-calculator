@@ -1,8 +1,9 @@
-section .bss
-    ; variables
+; rax = Values are returned from functions in this register.  
+; rdi = Scratch register and function argument #1 in 64-bit Linux.
+; rdx = Scratch register.
+section .bss ; variables
 
-section .data
-    ; constants
+section .data ; constants
     teststring: db "This is a test",0xa
     teststringlen: equ $-teststring
 
