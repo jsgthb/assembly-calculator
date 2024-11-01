@@ -10,6 +10,8 @@ section .data ; constants
     usage_len equ $ - usage  
     arg1_msg db "First number: ", 0
     arg1_msg_len equ $ - arg1_msg
+    arg2_msg db "Second number: ", 0
+    arg2_msg_len equ $ - arg2_msg
     newline db 10
 
 section .text
@@ -32,6 +34,24 @@ _start:
     syscall
 
     ; Print first argument
+    pop rsi
+    call print_string
+
+    ; Print newline
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, newline
+    mov rdx, 1
+    syscall
+
+    ; Print "Second number: "
+    mov rax, 1          ; sys_write
+    mov rdi, 1          ; stdout
+    mov rsi, arg2_msg   ; message
+    mov rdx, arg2_msg_len   ; length
+    syscall
+
+    ; Print second argument
     pop rsi
     call print_string
 
