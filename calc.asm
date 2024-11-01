@@ -10,6 +10,7 @@ section .data ; constants
     usage_len equ $ - usage  
     arg1_msg db "First number: ", 0
     arg1_msg_len equ $ - arg1_msg
+    newline db 10
 
 section .text
 global _start
@@ -33,6 +34,13 @@ _start:
     ; Print first argument
     pop rsi
     call print_string
+
+    ; Print newline
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, newline
+    mov rdx, 1
+    syscall
 
     ; End program sucessfully
     mov rax, 60  ; sys_exit
